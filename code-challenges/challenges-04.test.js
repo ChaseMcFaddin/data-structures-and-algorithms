@@ -24,9 +24,7 @@ let $ = createSnippetWithJQuery(`
 
 const generateSubmitButton = () => {
   // Solution code here...
-  const buttonSubmit = $('<button>submit</button>');
-  $('form').append(buttonSubmit);
-};
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
@@ -42,9 +40,7 @@ For example:
 
 const isNum = (input) => {
   // Solution code here...
-  let numberTest = /\d/;
-  //(numberTest.test(input));
-  return numberTest.test(input);
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -57,8 +53,7 @@ Return an array containing all the matches.
 
 const isCapitalized = (str) => {
   // Solution code here...
-  const capitalLetterMatch = /[A-Z]\w+/g;
-  return str.match(capitalLetterMatch) || [];
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -69,15 +64,7 @@ Write a function named citiesAtoJ that takes in an array of city names and uses 
 
 const citiesAtoJ = (arr) => {
   // Solution code here...
-  const newArray = /^[A-J]\w+/;
-  const result =[];
-  arr.forEach(city => {
-    if(newArray.test(city)) {
-      result.push(city);
-    }
-    //city.test will return true if cities are equal A-J.
-  });
-  return result;
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -156,7 +143,6 @@ describe('Testing challenge 1', () => {
   test('It should add a submit button to the DOM', () => {
     generateSubmitButton();
     expect($('button').text()).toStrictEqual('submit');
-  });
 });
 
 describe('Testing challenge 2', () => {
@@ -256,4 +242,4 @@ xdescribe('Testing challenge 8', () => {
 
 function createSnippetWithJQuery(html){
   return cheerio.load(html);
-}
+
