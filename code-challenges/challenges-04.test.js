@@ -23,7 +23,8 @@ let $ = createSnippetWithJQuery(`
 `);
 
 const generateSubmitButton = () => {
-  // Solution code here...
+  $('section').append('<button>submit</button>');
+};
 
 
 /* ------------------------------------------------------------------------------------------------
@@ -39,8 +40,8 @@ For example:
 ------------------------------------------------------------------------------------------------ */
 
 const isNum = (input) => {
-  // Solution code here...
-
+  let validator = /[0-9]/g;
+  return validator.test(input);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -52,8 +53,10 @@ Return an array containing all the matches.
 ------------------------------------------------------------------------------------------------ */
 
 const isCapitalized = (str) => {
-  // Solution code here...
-
+  let validator = /[A-Z]\w+/g;
+  if(validator.test(str)){
+    return str.match(validator);
+  } else {return [];}
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -63,11 +66,19 @@ Write a function named citiesAtoJ that takes in an array of city names and uses 
 ------------------------------------------------------------------------------------------------ */
 
 const citiesAtoJ = (arr) => {
-  // Solution code here...
-
+  let returnArray = [];
+  let validator = /^[a-jA-J]/;
+  arr.forEach(value => {
+    if (validator.test(value)){
+      returnArray.push(value);
+    }
+  });
+  return returnArray;
 };
+//'Cleveland', 'Birmingham', 'Austin', 'Boston', 'Hoboken'
+/* 
 
-/* ------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
 CHALLENGE 5 - Stretch Goal
 
 You have created a game application and begin by asking users an easy question: In which month is Halloween?
@@ -80,7 +91,10 @@ Do not use the vertical bar (pipe) in your pattern.
 ------------------------------------------------------------------------------------------------ */
 
 const matchMonth = (input) => {
-  // Solution code here...
+  let validator = /^[Oo]ct(ober)?$/g;
+  if (validator.test(input)){
+    return true;
+  }
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -94,7 +108,10 @@ The expected output of "Hello, and have a wonderful day!" is ["and ", "have ", "
 ------------------------------------------------------------------------------------------------ */
 
 const noPunctuation = str => {
-  // Solution code here...
+  let validator = /\w+ /g;
+  if (validator.test(str)){
+    return str.match(validator);
+  }
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -110,7 +127,11 @@ For example, 'Welcome to Code 301!' will return 'W_lc_m_ t_ C_d_ 301!'.
 ------------------------------------------------------------------------------------------------ */
 
 let hangman = (str) => {
-  // Solution code here...
+  let valid = /[aeiou]/gi;
+  if (valid.test(str)){
+    str = str.replace(valid, '_');
+  }
+  return str;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -126,7 +147,10 @@ Hint: All of these words end with the letters "ells".
 const seashells = 'She sells seashells by the seashore. The shells she sells are surely seashells. So if she sells shells on the seashore, I\'m sure she sells seashore shells.';
 
 const findShells = (str) => {
-  // Solution code here...
+  let valid = /\b(sea)?s[hs]?(ells)/gi;
+  if (valid.test(str)) {
+    return str.match(valid);
+  }
 };
 
 /* ------------------------------------------------------------------------------------------------
