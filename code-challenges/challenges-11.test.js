@@ -3,7 +3,7 @@
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 1 - Review
 
-Write a function that iterates over an array of people objects 
+Write a function that iterates over an array of people objects
 and creates a new list of each person's full name using the array method 'map'.
 Each object will have the shape {firstName:string, lastName:string}
 E.g. [ { firstName:"Jane", lastName:"Doe" }, { firstName:"James", lastName:"Bond"}]
@@ -12,7 +12,9 @@ Note the space in between first and last names.
 You can assume that neither firstName nor lastName will be blank
 ------------------------------------------------------------------------------------------------ */
 const toLastNames = people => {
-  // Solution code here...
+  return people.map(value => {
+    return `${value.firstName} ${value.lastName}`;
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -24,7 +26,8 @@ If the PIN is four numerical digits long, return true. Otherwise, return false.
 ------------------------------------------------------------------------------------------------ */
 
 const validatePin = (pin) => {
-  // Solution code here...
+  const checkPin  = /^\d{4}$/g;
+  if (checkPin.test(pin)){return true;}
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -37,7 +40,9 @@ If the word is between 5 and 10 characters long, return true. Otherwise, return 
 
 const validateWord = (word) => {
   // Solution code here...
+  return /^[a-zA-Z]{5,10}$/g.test(word);
 };
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
@@ -48,7 +53,7 @@ If it does, return true. If not, return false.
 ------------------------------------------------------------------------------------------------ */
 
 const hasNumber = (string) => {
-  // Solution code here...
+  return /^[a-zA-Z]+[0-9]/.test(string);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -68,7 +73,8 @@ Note: if you ever need to validate an email using a regex in practice, the Inter
 ------------------------------------------------------------------------------------------------ */
 
 const validateEmail = (email) => {
-  // Solution code here...
+  const emailCheck = /^\w+.?\w+[@]\w*.(com|net|org)$/g;
+  return email.match(emailCheck) ? true : false;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -93,7 +99,8 @@ Return either true or false.
 ------------------------------------------------------------------------------------------------ */
 
 const validatePhoneNumber = (phoneNumber) => {
-  // Solution code here...
+  const checkNumber = /^([(]\d{3}[)]|\d{3}?)[-\s]?\d{3}?[-\s]?\d{4}$/g;
+  return checkNumber.test(phoneNumber);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -106,7 +113,16 @@ findTagNames(['<div><h1>Hello, world!</h1></div>', '<p>Welcome to my site</p>'])
 ------------------------------------------------------------------------------------------------ */
 
 const findTagNames = elements => {
-  // Solution code here...
+  const tagCheck = /\/\w+/g;
+  const newArray = [];
+  elements.map(value => {
+    return value.match(tagCheck);
+  }).forEach(value => {
+    value.forEach(tag => {
+      newArray.push(tag);
+    });
+  });
+  return newArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -122,9 +138,9 @@ Run your tests from the console: jest solutions-11.test.js
 describe('Testing challenge 1', () => {
   test('It should convert object to full name string', () => {
 
-    const people = [{ firstName: "Jane", lastName: "Doe" }, { firstName: "James", lastName: "Bond" }];
+    const people = [{ firstName: 'Jane', lastName: 'Doe' }, { firstName: 'James', lastName: 'Bond' }];
 
-    expect(toLastNames(people)).toStrictEqual(["Jane Doe", "James Bond"]);
+    expect(toLastNames(people)).toStrictEqual(['Jane Doe', 'James Bond']);
 
   });
 });
