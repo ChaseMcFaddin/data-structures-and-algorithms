@@ -128,11 +128,10 @@ const snorlaxData = {
 };
 
 const getBaseStatGreaterThan = (arr, minBaseStat) => {
-  const getBaseStatGreaterThan = (arr, minBaseStat) => {
-    return arr.filter(value => {
-      if (value.baseStat > minBaseStat){return true;}
-    });
-  };
+  return arr.filter(value => {
+    if (value.baseStat > minBaseStat){return true;}
+  });
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 8 - Stretch Goal
