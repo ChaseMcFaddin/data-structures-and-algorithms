@@ -152,7 +152,9 @@ You may also use other string or array methods.
 
 const splitFoods = (recipe) => {
   let result = [];
-  // Solution code here...
+  recipe.ingredients.forEach(value => {
+    result.push((value.split(' ').splice(2)).join(' '));
+  });
   return result;
 };
 
@@ -168,7 +170,9 @@ Return a new array containing just the verbs. For example, ['Mix until evenly di
 
 const stepActions = (recipe) => {
   let result = [];
-  // Solution code here...
+  recipe.steps.forEach(value => {
+    result.push(value.slice(0, (value.indexOf(' '))));
+  });
   return result;
 };
 
@@ -186,7 +190,9 @@ For example:
 ------------------------------------------------------------------------------------------------ */
 
 const removeEvenValues = (arr) => {
-  // Solution code here...
+  for (let i = arr.length; i >= 0; i--){
+    if (arr[i]%2 === 0){arr.splice(i, 1);}
+  }
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -205,8 +211,9 @@ removeLastCharacters('Gregor', 9) returns ''
 ------------------------------------------------------------------------------------------------ */
 
 const removeLastCharacters = (str, numberOfCharacters) => {
-  // Solution code here...
+  return str.slice(0, (str.length - numberOfCharacters));
 };
+
 
 
 /* ------------------------------------------------------------------------------------------------
@@ -217,9 +224,13 @@ Write a function named totalSumCSV that, given a string of comma-separated value
 
 const totalSumCSV = (str) => {
   let total = 0;
-  // Solution code here...
+  let temp = str.split(',');
+  temp.forEach(value => {
+    total += parseInt(value);
+  });
   return total;
 };
+
 
 
 /* ------------------------------------------------------------------------------------------------
@@ -231,8 +242,16 @@ For example, removeVowels('gregor') returns 'grgr'.
 ------------------------------------------------------------------------------------------------ */
 
 const removeVowels = (str) => {
-  // Solution code here...
+  const vowels = ['a', 'e', 'i', 'o', 'u'];
+  for (let i = str.length; i >= 0; i--){
+    vowels.forEach(value => {
+      if (str[i] === value){str = str.replace(value, '');}
+    });
+  }
+  return str;
 };
+
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 11 - Stretch Goal
@@ -245,8 +264,21 @@ Similarly, extractVowels('The quick brown fox') returns ['Th qck brwn fx', 'eioo
 ------------------------------------------------------------------------------------------------ */
 
 const extractVowels = (str) => {
-  // Solution code here...
+  const vowels = ['a', 'e', 'i', 'o', 'u'];
+  let vowelStr = '';
+  str.split('').forEach(value => {
+    vowels.forEach(vowel => {
+      if (value === vowel){vowelStr += value;}
+    });
+  });
+  let tempArray = vowelStr.split('');
+  tempArray.sort((a, b) => {
+    if (a > b){return 1;}
+    else{return -1;}
+  });
+  return [removeVowels(str), tempArray.join('')];
 };
+
 
 /* ------------------------------------------------------------------------------------------------
 TESTS

@@ -20,7 +20,7 @@ let $ = createSnippetWithJQuery(`
 `);
 
 const addTea = () => {
-  // Solution code here...
+  $('ul').append('<li>tea</li>');
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -34,7 +34,11 @@ For example, twoToThe([1,2,3]) returns [2,4,8] because 2 ^ 1 = 2, 2 ^ 2 = 4, and
 ------------------------------------------------------------------------------------------------ */
 
 const forLoopTwoToThe = (arr) => {
-  // Solution code here...
+  const returnArray = [];
+  for (let n in arr){
+    returnArray.push(Math.pow(2, arr[n]));
+  }
+  return returnArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -44,7 +48,11 @@ Write a function named forEachTwoToThe that produces the same output as your for
 ------------------------------------------------------------------------------------------------ */
 
 const forEachTwoToThe = (arr) => {
-  // Solution code here...
+  const returnArray = [];
+  arr.forEach(value => {
+    returnArray.push(Math.pow(2, value));
+  });
+  return returnArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -54,7 +62,9 @@ Write a function named mapTwoToThe that produces the same output as your forLoop
 ------------------------------------------------------------------------------------------------ */
 
 const mapTwoToThe = (arr) => {
-  // Solution code here...
+  return arr.map(value => {
+    return Math.pow(2, value);
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -68,7 +78,9 @@ For example: charCode(['h','i']) returns [104, 105].
 ------------------------------------------------------------------------------------------------ */
 
 const charCode = (arr) => {
-  // Solution code here...
+  return arr.map(value => {
+    return value.charCodeAt(0);
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -82,7 +94,11 @@ For example: evenOdd([1,2,3]) returns ['odd','even','odd'].
 ------------------------------------------------------------------------------------------------ */
 
 const evenOdd = (arr) => {
-  // Solution code here...
+  return arr.map(value => {
+    if (isNaN(value)){return 'N/A';}
+    if (value%2 === 0){return 'even';}
+    else{return 'odd';}
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -128,7 +144,9 @@ const snorlaxAbilities = {
 };
 
 const extractAbilities = (arr) => {
-  // Solution code here...
+  return arr.map(value => {
+    return value.ability.name;
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -175,7 +193,12 @@ const snorlaxStats = {
 };
 
 const extractStats = (arr) => {
-  // Solution code here...
+  return arr.map(value => {
+    return {
+      name: value.stat.name,
+      total: value.effort+value.baseStat
+    };
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -193,7 +216,7 @@ describe('Testing challenge 1', () => {
   test('It should add tea to the list', () => {
     addTea();
     expect($('li:nth-child(6)').text()).toStrictEqual('tea');
-  })
+  });
 });
 
 describe('Testing challenge 2', () => {
@@ -278,4 +301,4 @@ xdescribe('Testing challenge 8', () => {
 
 function createSnippetWithJQuery(html){
   return cheerio.load(html);
-};
+}

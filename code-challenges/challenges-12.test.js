@@ -8,9 +8,12 @@ using the 'reduce' method.
 
 E.g. [4,2,7,5,9,2] -> 9
 ------------------------------------------------------------------------------------------------ */
+
 const maxInArray = (arr) => {
-  // Solution code here...
-  return;
+  return arr.reduce((max, value) => {
+    if(value > max){max = value;}
+    return max;
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -18,7 +21,7 @@ CHALLENGE 2
 
 Write a function named findMax that takes in a matrix of positive numbers and returns the number with the highest value.
 
-For example: 
+For example:
 [
   [1, 3, 4, 5],
   [4, 5, 6],
@@ -36,7 +39,7 @@ CHALLENGE 3
 
 Write a function named totalSum that takes in a matrix of numbers and returns the totalSum of all the numbers.
 
-For example: 
+For example:
 [
   [1, 3, 4, 5],
   [4, 5, 1],
@@ -73,8 +76,13 @@ const alkiBeach = [33, 31, 147, 130, 27, 93, 38, 126, 141, 63, 46, 17];
 const cookieStores = [firstPike, seaTac, seattleCenter, capHill, alkiBeach];
 
 const grandTotal = (stores) => {
-  // Solution code here...
-
+  return stores[0].map((hourly, i) => {
+    let total = 0;
+    for (let store = 0; store < stores.length; store++){
+      total += stores[store][i];
+    }
+    return total;
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -88,7 +96,11 @@ Write a function named salesData that uses forEach to iterate over the hourlySal
 ------------------------------------------------------------------------------------------------ */
 
 const salesData = (hours, data) => {
-  // Solution code here...
+  const returnArray = [];
+  data.forEach((total, i) => {
+    returnArray.push({sales: `${total} cookies`, time: hours[i]});
+  });
+  return returnArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -113,7 +125,17 @@ const errands = [
 ];
 
 const howManyTreats = (arr) => {
-  // Solution code here...
+  let treats = 0;
+  arr.forEach(errand => {
+    if (errand.store === 'Pet store'){
+      errand.items.forEach(item => {
+        if (item.name === 'Treats'){
+          treats = item.quantity;
+        }
+      });
+    }
+  });
+  return treats;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -135,7 +157,7 @@ The top row of the board is considered row zero and row numbers increase as they
 ------------------------------------------------------------------------------------------------ */
 
 const battleship = (board, row, col) => {
-  //  Solution code here...
+  return board[row][col] === '#' ? 'hit' : 'miss';
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -147,7 +169,13 @@ For example, the following input returns a product of 720: [[1,2], [3,4], [5,6]]
 ------------------------------------------------------------------------------------------------ */
 
 const calculateProduct = (numbers) => {
-  // Solution code here...
+  let returnTotal = 1;
+  numbers.forEach(arrays => {
+    arrays.forEach(value => {
+      returnTotal *= value;
+    });
+  });
+  return returnTotal;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -167,7 +195,15 @@ const weeklyTemperatures = [
 ];
 
 const averageDailyTemperature = (weather) => {
-  // Solution code here...
+  let average = 0;
+  let counter = 0;
+  weather.forEach(day => {
+    day.forEach(temp => {
+      average += temp;
+      counter++;
+    });
+  });
+  return average / counter;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -188,8 +224,16 @@ let lowestWeeklyTemperatureData = [
 ];
 
 const lowestWeeklyAverage = (weather) => {
-  // Solution code here...
+  return weather.map(day => {
+    return day.reduce((total, temp) => {
+      return total += temp;
+    })/day.length;
+  }).reduce((low, temp) => {
+    if(low > temp){low = temp;}
+    return low;
+  });
 };
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 11 - Stretch Goal
@@ -204,7 +248,15 @@ For example, excel('1,1,1\n4,4,4\n9,9,9') returns [3, 12, 27].
 ------------------------------------------------------------------------------------------------ */
 
 const excel = (str) => {
-  // Solution code here...
+  const returnArray = [];
+  str.split('\n').forEach(row => {
+    returnArray.push(row.split(',').reduce((total, value) => {
+      total = Number(total);
+      value = Number(value);
+      return total + value;
+    }));
+  });
+  return returnArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
