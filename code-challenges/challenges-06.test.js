@@ -70,13 +70,13 @@ let $ = createSnippetWithJQuery(`
 `);
 
 const templatingWithMustache = () => {
-  // Solution code here...
-  let newArray = [];
-  characters.forEach(character => {
-    let templateJQuery= $('#template').html();
-    newArray.push(Mustache.render(templateJQuery, character));
+  let $template = $('#template').html();
+  const returnArray = [];
+  characters.forEach(value => {
+    let newChar = Mustache.render($template, value);
+    returnArray.push(newChar);
   });
-  return newArray;
+  return returnArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -145,7 +145,9 @@ The input and output of this function are the same as the input and output from 
 ------------------------------------------------------------------------------------------------ */
 
 const hasChildrenEntries = (arr, character) => {
-  // Solution code here...
+  for (let value in arr){
+    if (arr[value].name === character && Object.entries(arr[value].children).length > 0){return true;}
+  }
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -155,7 +157,13 @@ Write a function named totalCharacters that takes in an array and returns the nu
 ------------------------------------------------------------------------------------------------ */
 
 const totalCharacters = (arr) => {
-  // Solution code here...
+  let numberOfChars = 0;
+  arr.forEach(value => {
+    numberOfChars++;
+    if (value.spouse){numberOfChars++;}
+    numberOfChars += value.children.length;
+  });
+  return numberOfChars;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -170,7 +178,15 @@ For example: [{ house: 'Stark', members: 7 }, { house: 'Arryn', members: 3 }, ..
 
 const houseSize = (arr) => {
   const sizes = [];
-  // Solution code here...
+  arr.forEach(value => {
+    let familyMembers = 1;
+    if (value.spouse){familyMembers++;}
+    familyMembers += value.children.length;
+    sizes.push({
+      house: value.house,
+      members: familyMembers
+    });
+  });
   return sizes;
 };
 
@@ -194,7 +210,18 @@ const deceasedSpouses = ['Catelyn', 'Lysa', 'Robert', 'Khal Drogo', 'Alerie'];
 
 const houseSurvivors = (arr) => {
   const survivors = [];
-  // Solution code here...
+  arr.forEach(value => {
+    let familyMembers = 1;
+    if (value.spouse){familyMembers++;}
+    deceasedSpouses.forEach(dead => {
+      if (value.spouse === dead){familyMembers--;}
+    });
+    familyMembers += value.children.length;
+    survivors.push({
+      house: value.house,
+      members: familyMembers
+    });
+  });
   return survivors;
 };
 
