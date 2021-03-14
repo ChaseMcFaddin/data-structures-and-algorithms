@@ -31,7 +31,10 @@ For example:
 return: 23
 ------------------------------------------------------------------------------------------------ */
 const findMax = (matrix) => {
-  // Solution code here...
+  // func to find largest
+  const getBigValue = (num1, num2) => num1 > num2 ? num1 : num2;
+  // first do for each arr then that new arr
+  return matrix.map(arr => arr.reduce(getBigValue)).reduce(getBigValue);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -49,7 +52,7 @@ For example:
 return: 35
 ------------------------------------------------------------------------------------------------ */
 const totalSum = (matrix) => {
-  // Solution code here...
+  return matrix.reduce((arr1, arr2) => arr1.concat(arr2), []).reduce((num1, num2) => num1 + num2, 0);
 };
 
 
