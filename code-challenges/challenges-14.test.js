@@ -12,7 +12,17 @@ const createServer = () => {
   const express = require('express');
   const app = express();
 
-  // solution code goes here ...
+  app.get('/', (request, response) => {
+    response.status(200).send();
+  });
+
+  app.delete('/things/1', (request, response) => {
+    response.status(405).send();
+  });
+
+  app.use('*', (request, response) => {
+    response.status(404).send();
+  });
 
   var server = app.listen(3000, function () {
     var port = server.address().port;
@@ -30,7 +40,9 @@ For example, ['apple', 'banana', 'MacGyver'] returns ['Apple', 'Banana', 'MacGyv
 ------------------------------------------------------------------------------------------------ */
 
 const toTitleCase = (arr) => {
-  // Solution code here...
+  return arr.map(word => {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -133,7 +145,10 @@ This data could be sorted by name or price.
 ------------------------------------------------------------------------------------------------ */
 
 const sortBy = (property, arr) => {
-  // Solution code here...
+  return arr.sort((a, b) => {
+    if (a[property] > b[property]){
+      return 1;} else {return -1;}
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -149,7 +164,8 @@ https://secure.com returns true because the URL is secure
 https:/missingslash.org returns false because the URL is malformed
 ------------------------------------------------------------------------------------------------ */
 const isSecure = (url) => {
-  // Solution code here...
+  let regex = /https:\/\//g;
+  return url.match(regex) ? true : false;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -172,7 +188,21 @@ Here is a sample board:
 ------------------------------------------------------------------------------------------------ */
 
 const detectTicTacToeWin = (board) => {
-  // Solution code here...
+  for (let r = 0; r < board.length; r++){
+    if(board[r][0] === board[r][1] && board[r][0] === board[r][2] && board[r][0] !== ''){
+      return true;
+    }
+    if(board[0][r] === board[1][r] && board[0][r] === board[2][r] && board[0][r] !== ''){
+      return true;
+    }
+  }
+  if (board[0][0] === board[1][1] && board[0][0] === board[2][2] && board[0][0] !== ''){
+    return true;
+  }
+  if (board[0][2] === board[1][1] && board[0][2] === board[2][0] && board[0][2] !== ''){
+    return true;
+  }
+  return false;
 };
 
 /* ------------------------------------------------------------------------------------------------
