@@ -40,8 +40,9 @@ For example, ['apple', 'banana', 'MacGyver'] returns ['Apple', 'Banana', 'MacGyv
 ------------------------------------------------------------------------------------------------ */
 
 const toTitleCase = (arr) => {
-   return arr.map(word => {
+  return arr.map(word => {
     return word.charAt(0).toUpperCase() + word.slice(1);
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -147,6 +148,7 @@ const sortBy = (property, arr) => {
   return arr.sort((a, b) => {
     if (a[property] > b[property]){
       return 1;} else {return -1;}
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
